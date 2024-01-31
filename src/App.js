@@ -15,9 +15,7 @@ class App extends React.Component {
     // this.state.item = {id:0, "title":"Hello React", "done":true}
     // App.js에 this.state.item이라는 이름으로 데이터를 생성
     // ToDo에게 item이라는 이름으로 데이터를 전달
-    this.state = {items:[{id:0, "title":"React", "done":true},
-                        {id:1, "title":"Vue", "done":false},
-                        {id:2, "title":"Angular", "done":false}]}
+    this.state = {items:[]}
   }
 
   // 데이터를 추가하는 함수
