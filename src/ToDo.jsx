@@ -4,8 +4,12 @@ import {
     ListItem,
     ListItemText,
     InputBase,
-    Checkbox
-} from "@material-ui/core"
+    Checkbox,
+    ListItemSecondaryAction,
+    IconButton
+} from "@material-ui/core";
+
+import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 
 // react에서 컴포넌트 클래스를 만들기 위해서 Component로부터 상속 받기
 // id와 name(서버에게 전송할 때 이름)은 가능하면 같은 이름 사용
@@ -18,6 +22,13 @@ class ToDo extends React.Component {
         // props는 상위 컴포넌트에서 전달한 데이터라서 읽기는 가능하지만 수정/삭제 안 됨
         // 수정/삭제를 하고자 하는 경우는 state로 변환해야 함
         this.state = {item: this.props.item} // item은 App.js에서 만들어줘야 함
+        // App.js에서 넘겨준 삭제 함수를 현재 클래스의 데이터로 변환
+        this.delete = this.props.delete
+    }
+
+    // 삭제 버튼을 누를 때 호출될 이벤트 핸들러
+    deleteEventHandler = (e) => {
+        this.delete(this.state.item)
     }
 
     // render(): 화면에 출력할 내용을 리턴하는 메서도
@@ -38,6 +49,11 @@ class ToDo extends React.Component {
                         fullWidth = {true}
                     />
                 </ListItemText>
+                <ListItemSecondaryAction>
+                    <IconButton aria-label = "Delete Todo" onClick = {this.deleteEventHandler}>
+                        <DeleteOutlined />
+                    </IconButton>
+                </ListItemSecondaryAction>
             </ListItem>
         )
     }

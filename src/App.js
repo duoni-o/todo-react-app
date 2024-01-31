@@ -39,6 +39,21 @@ class App extends React.Component {
     this.setState({items:thisItems});
   }
 
+  // 삭제를 위한 메서드
+  delete = (item) => {
+    // state나 props의 데이터는 직접 편집이 안됩니다.
+    const thisItems = this.state.items;
+
+    // 복사본에서 item을 제거
+    // filter 함수는 리턴 타입이 boolean인 함수를 매개변수로 받아서
+    // 리턴 결과가 true인 데이터만 모아서 배열로 리턴하는 함수
+    // 지우는 게 아니라 골라내는 거
+    const newItems = thisItems.filter((e) => e.id !== item.id);
+
+    // 원본에 다시 복사 (commit과 같은 개념)
+    this.setState({items:newItems})
+  }
+
   render() {
     // 배열을 순회하면서 출력할 내용을 생성
     // item은 배열을 순회할 때 각각의 데이터이고 idx는 인덱스
@@ -48,7 +63,8 @@ class App extends React.Component {
       <Paper style = {{margin:16}}>
         <List>
           {this.state.items.map((item, idx) => (
-            <ToDo item = {item} key = {idx} />
+            <ToDo item = {item} key = {idx}
+            delete = {this.delete} /> // ToDo로 데이터를 넘겨주기 위한 작업
           ))}
         </List>
       </Paper>
